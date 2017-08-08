@@ -14,9 +14,9 @@
 
 
 <div>
-	<form:form method="POST" modelAttribute="loginObject" action="checkLoginUser" class="box">
+	<form:form method="POST" modelAttribute="userDtoToLogin" action="checkLoginUser" class="box">
 
-		<div>
+		<div class="textErr">
 			${error}
 		</div>
 

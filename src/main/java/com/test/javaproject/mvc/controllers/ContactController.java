@@ -1,6 +1,6 @@
 package com.test.javaproject.mvc.controllers;
 
-import com.test.javaproject.mvc.dao.impl.WorkService;
+import com.test.javaproject.mvc.service.impl.WorkService;
 import com.test.javaproject.mvc.domains.RegEx;
 import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.dto.ContactDto;
@@ -75,16 +75,23 @@ public class ContactController {
 			///show entered data on reload page
 			attributes.addFlashAttribute("org.springframework.validation.BindingResult.contactDto",result);
 			attributes.addFlashAttribute("contactDto",contactDto);
+
 			if(!RegEx.checkValidTelNumber(contactDto.getMobPhoneNumber()))
 				attributes.addFlashAttribute("error1","errText.registration.errTelNumber");
-//				model.addAttribute("edit1", true);
 			if(!RegEx.checkValidHomeNumber(contactDto.getHomePhoneNumber()))
 				attributes.addFlashAttribute("error2","errText.registration.errHomeNumber");
-//				model.addAttribute("edit2", true);
 			return "redirect:/addContact";
 		} else{
-			service.getContactServiceImpl().saveContact(userDto.getUser_id(), contactDto);
-			return "redirect:/showContacts";
+
+			boolean isContactExist = service.getContactServiceImpl().checkExistingContact(userDto.getUser_id(),contactDto.getMobPhoneNumber());
+			if(isContactExist){
+				attributes.addFlashAttribute("contactDto",contactDto);
+				attributes.addFlashAttribute("error","Contact with such mobile number exists!");
+				return "redirect:/addContact";
+			}else {
+				service.getContactServiceImpl().saveContact(userDto.getUser_id(), contactDto);
+				return "redirect:/showContacts";
+			}
 		}
 	}
 	///"editContact/{contact_id}"
@@ -119,8 +126,9 @@ public class ContactController {
 //				model.addAttribute("edit2", true);
 			return "redirect:/"+contact_id;
 		} else{
-			service.getContactServiceImpl().editContact(contactDto);
-			return "redirect:/showContacts";
+				service.getContactServiceImpl().editContact(contactDto);
+				return "redirect:/showContacts";
+
 		}
 	}
 	

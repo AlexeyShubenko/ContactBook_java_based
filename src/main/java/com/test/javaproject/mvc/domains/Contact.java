@@ -69,7 +69,7 @@ public class Contact implements Serializable{
 		}
 
 		public Builder setLastName(ContactDto contactDto){
-			contact.setLastName(contactDto.getFirstName());
+			contact.setLastName(contactDto.getLastName());
 			return this;
 		}
 
@@ -171,7 +171,7 @@ public class Contact implements Serializable{
 				", homePhoneNumber='" + homePhoneNumber + '\'' +
 				", address='" + address + '\'' +
 				", email='" + email + '\'' +
-				", user=" + user +
+				", user=" + user.getUser_id() +
 				'}';
 	}
 }

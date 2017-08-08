@@ -16,6 +16,11 @@
 <body>
 	<form:form method="POST" modelAttribute="contactDto">
 		<h1 id="NoteCentr"><spring:message code="title.update"/></h1>
+
+		<div class="divErr">
+				${error}
+		</div>
+
 		  <table>
 
 			<tr>

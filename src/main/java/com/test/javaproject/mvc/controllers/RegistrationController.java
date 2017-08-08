@@ -1,6 +1,6 @@
 package com.test.javaproject.mvc.controllers;
 
-import com.test.javaproject.mvc.dao.impl.WorkService;
+import com.test.javaproject.mvc.service.impl.WorkService;
 import com.test.javaproject.mvc.domains.RegEx;
 import com.test.javaproject.mvc.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +48,17 @@ public class RegistrationController {
             attributes.addFlashAttribute("userDto",userDto);
             return "redirect:/userRegistration";
         }
-        boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto);
         boolean isValidLogin = RegEx.checkValidLogin(userDto.getLoginName());
         if (!isValidLogin) {
             ///wrong symbols
-            attributes.addFlashAttribute("error", "errText.registration.errSymbols");
+            attributes.addFlashAttribute("error", "Don`t user special symbols for login name!");
             return "redirect:/userRegistration";
         }
         //TODO show error messages
+        boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto.getLoginName());
         if (isExistUser) {
             ///user not exist
-            attributes.addFlashAttribute("error", "errText.registration.errExist");
+            attributes.addFlashAttribute("error", "User with this login is exist!");
             return "redirect:/userRegistration";
         }
 

@@ -1,4 +1,4 @@
-package com.test.javaproject.mvc.dao;
+package com.test.javaproject.mvc.service;
 
 import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.dto.ContactDto;
@@ -12,6 +12,6 @@ public interface ContactService {
 	void deleteContact(int contact_id);
 	ContactDto getContactById(int contact_id);
 	void editContact(ContactDto contact);
-	 
 	List<ContactDto> getContactsByParam(SearchObject s, int user_id);
+    boolean checkExistingContact(int user_id, String mobPhoneNumber);
 }

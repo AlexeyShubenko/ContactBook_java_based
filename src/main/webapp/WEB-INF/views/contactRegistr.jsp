@@ -16,6 +16,11 @@
 <body>
 	<form:form method="POST" modelAttribute="contactDto" action="saveNewContact">
 	<h1 id="NoteCentr"><spring:message code="title.contactRegist"/></h1>
+
+		<div class="divErr">
+				${error}
+		</div>
+
 	  <table>	
 	  
 	  	<tr>

@@ -1,6 +1,7 @@
 package com.test.javaproject.mvc.controllers;
 
-import com.test.javaproject.mvc.dao.impl.WorkService;
+import com.test.javaproject.mvc.exceptions.PasswordErrorException;
+import com.test.javaproject.mvc.service.impl.WorkService;
 import com.test.javaproject.mvc.domains.LoginTempObject;
 import com.test.javaproject.mvc.dto.UserDto;
 import com.test.javaproject.mvc.exceptions.UserNotFindException;
@@ -40,8 +41,8 @@ public class LoginController {
 	@RequestMapping(value = {"/","startPage"}, method = RequestMethod.GET)
 	public ModelAndView startPageLog(Model model) {
 		ModelAndView modelAndView = new ModelAndView();
-		if(!model.containsAttribute("loginObject")){
-			model.addAttribute("loginObject", new LoginTempObject());
+		if(!model.containsAttribute("userDtoToLogin")){
+			model.addAttribute("userDtoToLogin", new UserDto());
 		}
 		modelAndView.setViewName("startPage");
 		return modelAndView;
@@ -50,32 +51,27 @@ public class LoginController {
 	///after logging in, entered data id checked
 	///loginObject - come from jsp,model - object with data from jsp
 	@RequestMapping(value="/checkLoginUser", method=RequestMethod.POST)
-	public String checkLoginUser(@Valid @ModelAttribute("loginObject") LoginTempObject loginObject, BindingResult result,
+	public String checkLoginUser(@Valid @ModelAttribute("userDtoToLogin") UserDto userDtoToLogin, BindingResult result,
 								 RedirectAttributes attributes, HttpSession session){
 		if(result.hasErrors()){
-			attributes.addFlashAttribute("error", "errText.isExisting");
+			attributes.addFlashAttribute("error", "Input data is wrong!");
 			return "redirect:/";
 		}
-        UserDto userDto;
+		UserDto userDto = null;
 		try{
-		    userDto = service.getUserServiceImpl().getUserByLoginObject(loginObject);
+			userDto = service.getUserServiceImpl().verifyUser(userDtoToLogin.getLoginName(),userDtoToLogin.getPassword());
         }catch (UserNotFindException ex){
+			attributes.addFlashAttribute("error", ex.getMessage());
+			return "redirect:/";
+		}
+        catch (PasswordErrorException ex){
+			attributes.addFlashAttribute("error", "Password is not right!");
             return "redirect:/";
         }
-        if(Objects.isNull(userDto)){
-			return "redirect:/";
-		}
-        ///if user exist
-		if(userDto.getLoginName().equals(loginObject.getLoginName())
-                && userDto.getPassword().equals(loginObject.getPassword())){
-			session.setAttribute("userDto", userDto);
-			return "redirect:/showContacts";
-		}else{
-			attributes.addFlashAttribute("error", "errText.isExisting");
-            return "redirect:/";
-		}
+		//if all right
+		session.setAttribute("userDto", userDto);
+		return "redirect:/showContacts";
 	}
-
 
 	
 }

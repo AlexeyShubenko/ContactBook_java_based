@@ -18,7 +18,7 @@
 <div>
 	<form:form method="POST" modelAttribute="userDto" action="" >
 		<h1 id="NoteCentr"><spring:message code="title.login"/></h1>
-		<div>
+		<div class="textErr">
 			${error}
 		</div>
 	  <table>

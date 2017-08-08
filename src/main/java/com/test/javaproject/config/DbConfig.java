@@ -11,6 +11,7 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
@@ -58,14 +59,14 @@ public class DbConfig {
         return dataSource;
     }
 
-//    @Bean
-//    public JpaTransactionManager transactionManager() {
-//        // Подымаем менеджер транзакций, чтобы аннотация @Transactional работала.
-//        JpaTransactionManager transactionManager = new JpaTransactionManager();
-//        transactionManager.setEntityManagerFactory(getSessionFactory());
-//
-//        return transactionManager;
-//    }
+    @Bean
+    public JpaTransactionManager transactionManager() {
+        // Подымаем менеджер транзакций, чтобы аннотация @Transactional работала.
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(getSessionFactory());
+
+        return transactionManager;
+    }
 
     private Properties getHibernateProperties() {
         Properties properties = new Properties();
@@ -85,9 +86,7 @@ public class DbConfig {
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(){
         LocalSessionFactoryBuilder sessionBuilder = new LocalSessionFactoryBuilder(dataSource());
-//        sessionBuilder.addPackage(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
-        sessionBuilder.addAnnotatedClasses(User.class);
-        sessionBuilder.addAnnotatedClasses(Contact.class);
+        sessionBuilder.scanPackages(env.getRequiredProperty(PROP_ENTITYMANAGER_PACKAGES_TO_SCAN));
         sessionBuilder.addProperties(getHibernateProperties());
         return sessionBuilder.buildSessionFactory();
 

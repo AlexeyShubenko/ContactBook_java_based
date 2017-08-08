@@ -1,4 +1,4 @@
-package com.test.javaproject.mvc.dao.impl;
+package com.test.javaproject.mvc.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

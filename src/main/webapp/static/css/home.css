@@ -259,8 +259,4 @@ footer#main {
 
 .textErr{
 	color: red;
-	border: 1px solid;
-	border-color: blue;
-	border-radius: 2px;
-	border-bottom-color: black;	
 }
