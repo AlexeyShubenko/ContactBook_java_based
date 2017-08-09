@@ -41,8 +41,7 @@
 	border: 1px solid black;
 	border-radius: 3px;
 	padding: 2px;
-	color: black;
-	margin-top: 7%;
+	margin-top: 15%;
 	margin-left: 5%;
 }
 
@@ -68,10 +67,17 @@ th{
 	height: 50px;
 }
 
+.headTh{
+	border: 2px solid black;
+	background: #b0e0e6;
+	height: 50px;
+}
+
 table, th, td {
     border: 2px solid black;
 }
-td{
+
+.forTd{
 	height: 30px;
 }
 
@@ -89,13 +95,13 @@ td#noneBorder{
 	padding: 3px;
 	margin: 3px;
 	font-family: 'Times New Roman';
-	
-}
 
+}
 a{
 	text-decoration: none;
 	color:black;
 }
+
 h1#NoteCentr{
 	 margin-top: 2%;
 	 text-align: center;
@@ -104,17 +110,7 @@ h1#NoteCentr{
      text-shadow: 1px 1px 2px black, 0 0 5px darkblue;
 }
 
-.search{
-	
-	border:none;
-	margin-top: 6%;
-	margin-left: 10px;
-}
 
-.searchback{
-	margin-top: 7%;
-	margin-left: 10px;
-}
 
 .logOut{
 	width:25%;

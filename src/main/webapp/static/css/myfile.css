@@ -1,3 +1,110 @@
+.divTop{
+	background-color: #0080ff;
+	width: 99%;
+	height: 10%;
+	position: fixed;
+	border-radius: 5px;
+}
+
+.divRight{
+	float: right;
+	color: white;
+	margin-top:2%;
+	margin-right: 5%;
+}
+
+.logOutRef{
+	float: right;
+	margin-right: 5%;
+	color: white;
+	display: inline-block;
+	margin-top:2%;
+	border: 1px solid white;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+.addContact{
+	float: left;
+	margin-left: 5%;
+	color: white;
+	display: inline-block;
+	margin-top:2%;
+	border: 1px solid white;
+	border-radius: 3px;
+	padding: 2px;
+}
+
+.search{
+	display: inline-block;
+	/*margin-top: 7%;*/
+	padding-top: 8%;
+	padding-left: 5%;
+}
+
+table{
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+}
+
+th{
+	background: #b0e0e6;
+	height: 50px;
+}
+
+.head{
+	border: 2px solid black;
+	background: #b0e0e6;
+	height: 50px;
+}
+
+.myTableClass{
+	border: 2px solid black;
+	border-collapse: collapse;
+	text-align: center;
+	width: 100%;
+	height: 30px;
+}
+
+table, th, td {
+	border: 2px solid black;
+}
+
+.forTd{
+	height: 30px;
+	border: 2px solid black;
+}
+
+td#noneBorder{
+	border-color: white;
+	width: 30px;
+}
+
+.button{
+	background: #a1d8f0;
+	color: black;
+	border: 1px solid;
+	border-radius: 8px;
+	font-size: 12pt;
+	padding: 3px;
+	margin: 3px;
+	font-family: 'Times New Roman';
+
+}
+a{
+	text-decoration: none;
+	color:black;
+}
+
+h1#NoteCentr{
+	margin-top: 2%;
+	text-align: center;
+	letter-spacing: 5px;
+	color: white;
+	text-shadow: 1px 1px 2px black, 0 0 5px darkblue;
+}
+
 .textErr{
 	color: red;
 }
@@ -13,3 +120,9 @@ a{
 	text-decoration: none;
 }
 
+.logOut{
+	width:25%;
+	font:black;
+	margin-top:10%;
+	border:1px solid;
+}

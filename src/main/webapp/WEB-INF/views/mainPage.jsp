@@ -1,58 +1,104 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<link href="./static/css/contactFile.css" rel="stylesheet">
-	<title>All contacts</title>
+
+	<link href="./static/css/myfile.css" rel="stylesheet" />
+
+		<title>All contacts</title>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="./static/js/tableFill.js"></script>
+		<script>
+            $(document).ready(function () {
+
+                $.ajax({
+                    type: 'GET',
+                    url: 'getAllContacts',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        var table = document.createElement("table");
+                        table.className="myTableClass";
+						addTableHead(table);
+
+                        for (var i = 0; i < data.length; i++) {
+                            fillTable(table,i,data[i]);
+                        }
+                        var myDiv = document.getElementById("myTable");
+                        myDiv.appendChild(table);
+                    }
+                });
+
+            });
+
+            function addTableHead(table) {
+                var header = table.insertRow(0);
+                header.className = "head";
+                var newCell = header.insertCell(0);
+                newCell.innerHTML="<spring:message code='contact.params.firstname'/>";
+                var newCell = header.insertCell(1);
+                newCell.innerHTML="<spring:message code='contact.params.lastname'/>";
+                var newCell = header.insertCell(2);
+                newCell.innerHTML="<spring:message code='contact.params.middlename'/>";
+                var newCell = header.insertCell(3);
+                newCell.innerHTML="<spring:message code='contact.params.mobPhoneNumber'/>";
+                var newCell = header.insertCell(4);
+                newCell.innerHTML="<spring:message code='contact.params.homePhoneNumber'/>";
+                var newCell = header.insertCell(5);
+                newCell.innerHTML="<spring:message code='contact.params.address'/>";
+                var newCell = header.insertCell(6);
+                newCell.innerHTML="Email";
+            }
+
+			function searchByParameter() {
+				var searchBy = $("input:checked").val();
+				var parameter = $("input#search").val();
+				if(parameter!=""){
+                    getContactsByParameter(searchBy, parameter);
+                }
+            }
+
+			function getContactsByParameter(searchBy, parameter) {
+                var data = {};
+                data["searchBy"] = searchBy;
+                data["parameter"] = parameter;
+                $.ajax({
+					type: 'POST',
+					url: 'getContactsByName',
+					contentType: 'application/json',
+					dataType: "json",
+					data: JSON.stringify(data),
+					success: function (data) {
+						console.log("success");
+					}
+				});
+			}
+
+	</script>
+
 </head>
 <body>
-	
+
 		<div class="divTop">
 			<a href="/logOut" class="logOutRef">Log out</a>
 			<div class="divRight">login: ${userDto.loginName}</div>
 			<a class="addContact" href="./addContact"><spring:message code="button.value.addcontact"/></a>
 		</div>
-			
-			<form:form method="POST" modelAttribute="searcher" action="search" class="search" >
-				<form:label path="searcher" ></form:label>
-				<form:input path="searcher"/>
-	 			<form:radiobutton path="flag" value="true"  />By first name/By last name
-				<form:radiobutton path="flag" value="false"/>By mobile phone	
-				<input type="submit" value='<spring:message code="button.value.search"/>' class="button" >
-			</form:form>
-		
-			
+
+		<div class="search">
+			<div>
+				<input type="radio" id="byName" name="search" value="byName" checked="checked"> by name </br>
+				<input type="radio" id="byNumber" name="search" value="byNumber"> by number </br>
+			</div>
+			<%--<input type="button" value="By number" id="byNumber" onclick="getContactsByNumber()"/>--%>
+			<input type="text" id="search" onkeyup="searchByParameter()">
+		</div>
+
 		<h1 id="NoteCentr"><spring:message code="title.showcontacts"/></h1>
-	  <table style="{width: 70%;}">
-	  		<tr> 
-				<th><spring:message code="contact.params.firstname"/></th>
-				<th><spring:message code="contact.params.lastname"/></th>
-				<th><spring:message code="contact.params.middlename"/></th>
-				<th><spring:message code="contact.params.mobPhoneNumber"/></th>
-				<th><spring:message code="contact.params.homePhoneNumber"/></th>
-				<th><spring:message code="contact.params.address"/></th>
-				<th>Email</th>
-			</tr>		
-		<c:forEach items="${contactsDto}" var="contactDto">
-			<tr>
-				<td>${contactDto.firstName} </td>
-				<td>${contactDto.lastName}</td>
-				<td>${contactDto.middleName}</td>
-				<td>${contactDto.mobPhoneNumber}</td>
-				<td>${contactDto.homePhoneNumber}</td>
-				<td>${contactDto.address}</td>
-				<td>${contactDto.email}</td>
-				<td id="noneBorder"><a class="button" href="./deleteContact/${contactDto.contact_id}">delete</a></td>
-				<%--<td id="noneBorder"><a class="button" href="./editContact/${contactDto.contact_id}">update</a></td>--%>
-				<td id="noneBorder"><a class="button" href="./${contactDto.contact_id}">update</a></td>
-			</tr>
-		</c:forEach>	
-	  </table>
+		<div id="myTable"></div>
 
 </body>
 </html>

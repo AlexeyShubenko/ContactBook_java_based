@@ -128,7 +128,6 @@ public class ContactController {
 		} else{
 				service.getContactServiceImpl().editContact(contactDto);
 				return "redirect:/showContacts";
-
 		}
 	}
 	
