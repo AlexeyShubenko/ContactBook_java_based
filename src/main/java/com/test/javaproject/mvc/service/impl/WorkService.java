@@ -1,5 +1,6 @@
 package com.test.javaproject.mvc.service.impl;
 
+import com.test.javaproject.mvc.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,27 +9,24 @@ public class WorkService {
 
     private UserServiceImpl userServiceImpl;
     private ContactServiceImpl contactServiceImpl;
+    private SearchServiceImpl searchServiceImpl;
 
 	@Autowired
-	public WorkService(UserServiceImpl userServiceImpl, ContactServiceImpl contactServiceImpl){
+	public WorkService(UserServiceImpl userServiceImpl, ContactServiceImpl contactServiceImpl, SearchServiceImpl searchServiceImpl){
 		this.userServiceImpl = userServiceImpl;
 		this.contactServiceImpl = contactServiceImpl;
+		this.searchServiceImpl = searchServiceImpl;
 	}
 
 	public UserServiceImpl getUserServiceImpl() {
 		return userServiceImpl;
 	}
 
-	public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
-		this.userServiceImpl = userServiceImpl;
-	}
-
 	public ContactServiceImpl getContactServiceImpl() {
 		return contactServiceImpl;
 	}
 
-	public void setContactServiceImpl(ContactServiceImpl contactServiceImpl) {
-		this.contactServiceImpl = contactServiceImpl;
+	public SearchServiceImpl getSearchServiceImpl() {
+		return searchServiceImpl;
 	}
-
 }

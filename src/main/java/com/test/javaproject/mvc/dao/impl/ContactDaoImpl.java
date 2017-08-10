@@ -163,15 +163,6 @@ public class ContactDaoImpl implements ContactDao{
     }
 
     @Override
-    public List<ContactDto> getContactsByParam(SearchObject s, int user_id) {
-        List<ContactDto> contactsDto = getContactList(user_id);
-        ///true - search by name, false - search by number
-        if(s.isFlag()){
-            return search.searchByName(s, contactsDto);
-        }else return search.searchByNumber(s, contactsDto);
-    }
-
-    @Override
     public boolean checkExistingContact(int user_id, String mobPhoneNumber) {
         EntityManager entityManager = sessionFactory.createEntityManager();
         List<Contact> contacts=null;

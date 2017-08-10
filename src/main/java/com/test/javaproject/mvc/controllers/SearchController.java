@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Alexey on 08.08.2017.
@@ -28,16 +29,24 @@ public class SearchController {
     }
 
     @RequestMapping(value = "/getContactsByName", method = RequestMethod.POST)
-    public List<ContactDto> getContactsByName(@RequestBody SearchParameter searchParameter){
-        System.out.println(searchParameter.toString());
-
-        return new ArrayList<>();
+    public List<ContactDto> getContactsByName(@RequestBody SearchParameter searchParameter, HttpSession session){
+        UserDto userDto = (UserDto) session.getAttribute("userDto");
+        List<ContactDto> allContactsByParameter = null;
+        if(Objects.nonNull(userDto)){
+            allContactsByParameter =
+                    workService.getSearchServiceImpl().getContactsByParameter(searchParameter, userDto.getUser_id());
+        }
+        return allContactsByParameter;
     }
 
     @RequestMapping(value = "/getAllContacts", method = RequestMethod.GET)
     public List<ContactDto> getAllContacts(HttpSession session){
         UserDto userDto = (UserDto) session.getAttribute("userDto");
-        return workService.getContactServiceImpl().getContactList(userDto.getUser_id());
+        List<ContactDto> allContacts = null;
+        if(Objects.nonNull(userDto)) {
+            allContacts = workService.getContactServiceImpl().getContactList(userDto.getUser_id());
+        }
+        return allContacts;
     }
 
 

@@ -15,6 +15,5 @@ public interface ContactDao {
     void editContact(ContactDto contactDto);
     ContactDto getContactById(int contact_id);
     void deleteContact(int contact_id);
-    List<ContactDto> getContactsByParam(SearchObject s, int user_id);
     boolean checkExistingContact(int user_id, String mobPhoneNumber);
 }

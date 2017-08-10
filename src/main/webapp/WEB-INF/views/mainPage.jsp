@@ -12,27 +12,13 @@
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./static/js/tableFill.js"></script>
+		<script src="./static/js/allContacts.js"></script>
 		<script>
-            $(document).ready(function () {
+            var contacts = [];
 
-                $.ajax({
-                    type: 'GET',
-                    url: 'getAllContacts',
-                    contentType: 'application/json',
-                    success: function (data) {
-                        var table = document.createElement("table");
-                        table.className="myTableClass";
-						addTableHead(table);
-
-                        for (var i = 0; i < data.length; i++) {
-                            fillTable(table,i,data[i]);
-                        }
-                        var myDiv = document.getElementById("myTable");
-                        myDiv.appendChild(table);
-                    }
-                });
-
-            });
+            window.onload=function () {
+                getAllContacts();
+            }
 
             function addTableHead(table) {
                 var header = table.insertRow(0);
@@ -56,9 +42,12 @@
 			function searchByParameter() {
 				var searchBy = $("input:checked").val();
 				var parameter = $("input#search").val();
+                clearContactTable("myTable");
 				if(parameter!=""){
                     getContactsByParameter(searchBy, parameter);
-                }
+                }else{
+                    showAllContacts(contacts);
+				}
             }
 
 			function getContactsByParameter(searchBy, parameter) {
@@ -66,16 +55,22 @@
                 data["searchBy"] = searchBy;
                 data["parameter"] = parameter;
                 $.ajax({
-					type: 'POST',
-					url: 'getContactsByName',
-					contentType: 'application/json',
-					dataType: "json",
-					data: JSON.stringify(data),
-					success: function (data) {
-						console.log("success");
-					}
-				});
-			}
+                    type: 'POST',
+                    url: 'getContactsByName',
+                    contentType: 'application/json',
+                    dataType: "json",
+                    data: JSON.stringify(data),
+                    success: function (data) {
+                        console.log(data);
+                        showAllContacts(data);
+                    }
+                });
+            }
+			
+			
+            function clearContactTable(elementId) {
+                document.getElementById(elementId).innerHTML = "";
+            }
 
 	</script>
 
@@ -98,6 +93,7 @@
 		</div>
 
 		<h1 id="NoteCentr"><spring:message code="title.showcontacts"/></h1>
+
 		<div id="myTable"></div>
 
 </body>

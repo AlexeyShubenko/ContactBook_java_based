@@ -24,5 +24,5 @@ function fillTable(table, i,contact) {
     newCell.innerHTML="<a class='button' href='./deleteContact/"+contact.contact_id + "'>" + "delete" + "</a>";
     var newCell = newRow.insertCell(8);
     newCell.id = "noneBorder";
-    newCell.innerHTML="<a class='button' href=" + contact.contact_id+ "'../'>" + "update" + "</a>";
+    newCell.innerHTML="<a class='button' href=" + contact.contact_id+ ">" + "update" + "</a>";
 }

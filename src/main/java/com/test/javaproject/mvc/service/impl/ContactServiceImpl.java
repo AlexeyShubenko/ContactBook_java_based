@@ -43,10 +43,7 @@ public class ContactServiceImpl implements ContactService {
 		contactDao.deleteContact(contact_id);
 	}
 
-	@Override
-	public List<ContactDto> getContactsByParam(SearchObject s, int user_id) {
-		return contactDao.getContactsByParam(s,user_id);
-	}
+
 
 	@Override
 	public boolean checkExistingContact(int user_id, String mobPhoneNumber) {

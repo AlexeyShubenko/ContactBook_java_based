@@ -141,17 +141,17 @@ public class ContactController {
 		return "redirect:/showContacts";
 	}
 	
-	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public ModelAndView searchOj(@ModelAttribute("searcher")SearchObject searchObject, HttpSession session){
-		UserDto userDto = (UserDto) session.getAttribute("userDto");
-		List<ContactDto> contactsDto;
-		if(searchObject.getSearcher().equals("")){
-			contactsDto = service.getContactServiceImpl().getContactList(userDto.getUser_id());
-		} else{
-			contactsDto = service.getContactServiceImpl().getContactsByParam(searchObject,userDto.getUser_id());
-		}
-		return new ModelAndView("mainPage","contactsDto", contactsDto);
-	}
+//	@RequestMapping(value="/search", method=RequestMethod.POST)
+//	public ModelAndView searchOj(@ModelAttribute("searcher")SearchObject searchObject, HttpSession session){
+//		UserDto userDto = (UserDto) session.getAttribute("userDto");
+//		List<ContactDto> contactsDto;
+//		if(searchObject.getSearcher().equals("")){
+//			contactsDto = service.getContactServiceImpl().getContactList(userDto.getUser_id());
+//		} else{
+//			contactsDto = service.getContactServiceImpl().getContactsByParam(searchObject,userDto.getUser_id());
+//		}
+//		return new ModelAndView("mainPage","contactsDto", contactsDto);
+//	}
 	
 	@RequestMapping(value="/logOut", method=RequestMethod.GET)
 	public String logOut(){
