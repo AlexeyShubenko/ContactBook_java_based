@@ -25,16 +25,26 @@ function getAllContacts() {
 };
 
 
-
 function showAllContacts(contacts){
-    clearContactTable("myTable");
-    var table = document.createElement("table");
-    table.className="myTableClass";
-    addTableHead(table);
+    var table = document.getElementById("contactTable");
+    if(table==null){
+        var table = document.createElement("table");
+        table.id="contactTable";
+        table.className="myTableClass";
+        addTableHead(table);
+    }
+    deletePreviousContacts(table,contacts.length);
 
     for (var i = 0; i < contacts.length; i++) {
         fillTable(table,i,contacts[i]);
     }
     var myDiv = document.getElementById("myTable");
     myDiv.appendChild(table);
+}
+
+
+function deletePreviousContacts(table) {
+    for (var i = 1; i < table.rows.length; i++) {
+        table.deleteRow(i);
+    }
 }

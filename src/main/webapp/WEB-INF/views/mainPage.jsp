@@ -13,13 +13,12 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 		<script src="./static/js/tableFill.js"></script>
 		<script src="./static/js/allContacts.js"></script>
+		<script src="./static/js/searchContacts.js"></script>
 		<script>
             var contacts = [];
-
             window.onload=function () {
                 getAllContacts();
             }
-
             function addTableHead(table) {
                 var header = table.insertRow(0);
                 header.className = "head";
@@ -37,39 +36,10 @@
                 newCell.innerHTML="<spring:message code='contact.params.address'/>";
                 var newCell = header.insertCell(6);
                 newCell.innerHTML="Email";
-            }
-
-			function searchByParameter() {
-				var searchBy = $("input:checked").val();
-				var parameter = $("input#search").val();
-                clearContactTable("myTable");
-				if(parameter!=""){
-                    getContactsByParameter(searchBy, parameter);
-                }else{
-                    showAllContacts(contacts);
-				}
-            }
-
-			function getContactsByParameter(searchBy, parameter) {
-                var data = {};
-                data["searchBy"] = searchBy;
-                data["parameter"] = parameter;
-                $.ajax({
-                    type: 'POST',
-                    url: 'getContactsByName',
-                    contentType: 'application/json',
-                    dataType: "json",
-                    data: JSON.stringify(data),
-                    success: function (data) {
-                        console.log(data);
-                        showAllContacts(data);
-                    }
-                });
-            }
-			
-			
-            function clearContactTable(elementId) {
-                document.getElementById(elementId).innerHTML = "";
+                var newCell = header.insertCell(7);
+                newCell.innerHTML="<spring:message code='contact.params.delete'/>";
+                var newCell = header.insertCell(8);
+                newCell.innerHTML="<spring:message code='contact.params.update'/>";
             }
 
 	</script>
@@ -88,13 +58,14 @@
 				<input type="radio" id="byName" name="search" value="byName" checked="checked"> by name </br>
 				<input type="radio" id="byNumber" name="search" value="byNumber"> by number </br>
 			</div>
-			<%--<input type="button" value="By number" id="byNumber" onclick="getContactsByNumber()"/>--%>
-			<input type="text" id="search" onkeyup="searchByParameter()">
+
+			<input type="text" id="searchField" onkeyup="searchByParameter()">
 		</div>
 
 		<h1 id="NoteCentr"><spring:message code="title.showcontacts"/></h1>
 
-		<div id="myTable"></div>
+		<div id="myTable">
+		</div>
 
 </body>
 </html>
