@@ -58,7 +58,6 @@
 				<input type="radio" id="byName" name="search" value="byName" checked="checked"> by name </br>
 				<input type="radio" id="byNumber" name="search" value="byNumber"> by number </br>
 			</div>
-
 			<input type="text" id="searchField" onkeyup="searchByParameter()">
 		</div>
 

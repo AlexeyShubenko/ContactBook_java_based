@@ -57,7 +57,7 @@ public class LoginController {
 			attributes.addFlashAttribute("error", "Input data is wrong!");
 			return "redirect:/";
 		}
-		UserDto userDto = null;
+		UserDto userDto;
 		try{
 			userDto = service.getUserServiceImpl().verifyUser(userDtoToLogin.getLoginName(),userDtoToLogin.getPassword());
         }catch (UserNotFindException ex){

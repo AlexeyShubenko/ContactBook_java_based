@@ -33,7 +33,7 @@ public class SearchServiceImpl implements SearchService {
             return searchByNumber(parameter, allContacts);
         }
     }
-    public List<ContactDto> searchByName(String parameter, List<ContactDto> allContacts){
+    private List<ContactDto> searchByName(String parameter, List<ContactDto> allContacts){
         List<ContactDto> byname = new ArrayList<>();
         for(ContactDto c: allContacts){
             if(c.getFirstName().regionMatches(true, 0, parameter, 0, parameter.length())
@@ -44,7 +44,7 @@ public class SearchServiceImpl implements SearchService {
         return byname;
     }
 
-    public List<ContactDto> searchByNumber(String parameter, List<ContactDto> allContacts){
+    private List<ContactDto> searchByNumber(String parameter, List<ContactDto> allContacts){
         List<ContactDto> bynum = new ArrayList<>();
         for(ContactDto c: allContacts){
             if(c.getMobPhoneNumber().regionMatches(true, 0, parameter, 0, parameter.length()))

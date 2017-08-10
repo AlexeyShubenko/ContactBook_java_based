@@ -38,13 +38,10 @@ public class ContactController {
 		if(Objects.isNull(userDto)){
 			return new ModelAndView("redirect:/");
 		}
-		List<ContactDto> contactsDto = service.getContactServiceImpl().getContactList(userDto.getUser_id());
 		ModelAndView modelAndView = new ModelAndView();
 		//for further searching of contacts
-		modelAndView.addObject("searcher", new SearchObject());
 		modelAndView.setViewName("mainPage");
 		///all contacts will be searched
-		modelAndView.addObject("contactsDto", contactsDto);
 		return modelAndView;
 	}
 
@@ -154,8 +151,13 @@ public class ContactController {
 //	}
 	
 	@RequestMapping(value="/logOut", method=RequestMethod.GET)
-	public String logOut(){
-		return "exitPage";
+	public String logOut(HttpSession session){
+		UserDto userDto = (UserDto) session.getAttribute("userDto");
+		if(Objects.nonNull(userDto)){
+			return "exitPage";
+		}else
+			return "redirect:/";
+
 	}
 	
 	@RequestMapping(value="/exit", method=RequestMethod.GET)

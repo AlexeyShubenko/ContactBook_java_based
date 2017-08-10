@@ -12,7 +12,7 @@
 </head>
 <body>
 		<div class="divTop">
-			<div class="divRight">login: ${user.loginName}</div>	
+			<div class="divRight">login: ${userDto.loginName}</div>
 		</div>
 		
 		<h1 id="NoteCentr"><spring:message code="title.logout"/></h1>
