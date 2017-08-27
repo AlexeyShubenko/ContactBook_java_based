@@ -24,9 +24,9 @@
 	  <table>
 
 	  	<tr>
-			<td id="head"><form:label path="loginName"><spring:message code="user.params.loginName"/>:</form:label></td>
-			<td><form:input path="loginName"/></td>
-			<td><form:errors path="loginName" class="textErr"/><td>
+			<td id="head"><form:label path="login"><spring:message code="user.params.login"/>:</form:label></td>
+			<td><form:input path="login"/></td>
+			<td><form:errors path="login" class="textErr"/><td>
 		</tr>
 	  	
 	  	<tr>

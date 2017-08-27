@@ -10,9 +10,9 @@ import java.io.Serializable;
 public class Contact implements Serializable{
 
 	@Id
-	@Column(name="contact_id")
+	@Column(name="contactid")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int contact_id;
+	private Long contactId;
 
 	@Column(name="firstname", nullable=false)
 	private String firstName;
@@ -23,10 +23,10 @@ public class Contact implements Serializable{
 	@Column(name="middlename", nullable=false)
 	private String middleName;
 
-	@Column(name="mobPhoneNumber", nullable=false)
+	@Column(name="mob_phone_number", nullable=false)
 	private String mobPhoneNumber;
 	
-	@Column(name="homePhoneNumber")
+	@Column(name="home_phone_number")
 	private String homePhoneNumber;
 	
 	@Column(name="address")
@@ -36,15 +36,15 @@ public class Contact implements Serializable{
 	private String email;
 	
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name="userid")
 	private User user;
 	
 	public Contact(){}
 	
-	public Contact(int contact_id, String firstName, String lastName, String middleName, String mobPhoneNumber,
+	public Contact(Long contactId, String firstName, String lastName, String middleName, String mobPhoneNumber,
 				   String homePhoneNumber, String address, String email) {
 		super();
-		this.contact_id = contact_id;
+		this.contactId = contactId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.middleName = middleName;
@@ -59,7 +59,7 @@ public class Contact implements Serializable{
 		private Contact contact = new Contact();
 
 		public Builder setContactId(ContactDto contactDto){
-			contactDto.setContact_id(contactDto.getContact_id());
+			contactDto.setContactId(contactDto.getContactId());
 			return this;
 		}
 
@@ -104,11 +104,11 @@ public class Contact implements Serializable{
 
 	}
 
-	public int getContact_id() {
-		return contact_id;
+	public Long getContactId() {
+		return contactId;
 	}	
-	public void setContact_id(int contact_id) {
-		this.contact_id = contact_id;
+	public void setContactId(Long contactId) {
+		this.contactId = contactId;
 	}
 	public String getFirstName() {
 		return firstName;
@@ -163,7 +163,7 @@ public class Contact implements Serializable{
 	@Override
 	public String toString() {
 		return "Contact{" +
-				"contact_id=" + contact_id +
+				"contactId=" + contactId +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				", middleName='" + middleName + '\'' +
@@ -171,7 +171,7 @@ public class Contact implements Serializable{
 				", homePhoneNumber='" + homePhoneNumber + '\'' +
 				", address='" + address + '\'' +
 				", email='" + email + '\'' +
-				", user=" + user.getUser_id() +
+				", user=" + user.getUserId() +
 				'}';
 	}
 }

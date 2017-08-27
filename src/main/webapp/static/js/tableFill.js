@@ -21,8 +21,8 @@ function fillTable(table, i,contact) {
     newCell.innerHTML=contact.email;
     var newCell = newRow.insertCell(7);
     newCell.id = "noneBorder";
-    newCell.innerHTML="<a class='button' href='./deleteContact/"+contact.contact_id + "'>" + "delete" + "</a>";
+    newCell.innerHTML="<a class='button' href='./deleteContact/"+contact.contactId + "'>" + "delete" + "</a>";
     var newCell = newRow.insertCell(8);
     newCell.id = "noneBorder";
-    newCell.innerHTML="<a class='button' href=" + contact.contact_id+ ">" + "update" + "</a>";
+    newCell.innerHTML="<a class='button' href=" + contact.contactId+ ">" + "update" + "</a>";
 }

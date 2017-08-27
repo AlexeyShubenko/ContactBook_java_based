@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface ContactService {
 
-	List<ContactDto> getContactList(int user_id);
-	void saveContact(int user_id, ContactDto contactDto);
-	void deleteContact(int contact_id);
-	ContactDto getContactById(int contact_id);
+	List<ContactDto> getContactList(Long user_id);
+	void saveContact(Long user_id, ContactDto contactDto);
+	void deleteContact(Long contact_id);
+	ContactDto getContactById(Long contact_id);
 	void editContact(ContactDto contact);
-    boolean checkExistingContact(int user_id, String mobPhoneNumber);
+    boolean checkExistingContact(Long user_id, String mobPhoneNumber);
 }

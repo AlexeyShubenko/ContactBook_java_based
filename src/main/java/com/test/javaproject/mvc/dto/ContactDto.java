@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 public class ContactDto implements Serializable{
 
-	private int contact_id;
+	private Long contactId;
 
 	@Size(min=4, message="{contact.size.name}")
 	private String firstName;
@@ -29,10 +29,9 @@ public class ContactDto implements Serializable{
 
 	public ContactDto(){}
 
-	public ContactDto(int contact_id, String firstname, String lastname, String middlename, String mobPhoneNumber,
+	public ContactDto(String firstname, String lastname, String middlename, String mobPhoneNumber,
                       String homePhoneNumber, String address, String email) {
 		super();
-		this.contact_id = contact_id;
 		this.firstName = firstname;
 		this.lastName = lastname;
 		this.middleName = middlename;
@@ -47,7 +46,7 @@ public class ContactDto implements Serializable{
 		private ContactDto contactDto = new ContactDto();
 
 		public Builder setContactId(Contact contact){
-			contactDto.setContact_id(contact.getContact_id());
+			contactDto.setContactId(contact.getContactId());
 			return this;
 		}
 
@@ -90,12 +89,12 @@ public class ContactDto implements Serializable{
 		}
 	}
 
-	public int getContact_id() {
-		return contact_id;
+	public Long getContactId() {
+		return contactId;
 	}
 
-	public void setContact_id(int contact_id) {
-		this.contact_id = contact_id;
+	public void setContactId(Long contactId) {
+		this.contactId = contactId;
 	}
 
 	public String getFirstName() {
@@ -157,7 +156,7 @@ public class ContactDto implements Serializable{
 	@Override
 	public String toString() {
 		return "ContactDto{" +
-				"contact_id=" + contact_id +
+				"contactId=" + contactId +
 				", firstName='" + firstName + '\'' +
 				", lastName='" + lastName + '\'' +
 				", middleName='" + middleName + '\'' +

@@ -20,8 +20,8 @@
 			${error}
 		</div>
 
-		<form:label path="loginName">Login:</form:label>
-		<form:input path="loginName" name="login" />
+		<form:label path="login">Login:</form:label>
+		<form:input path="login" name="login" />
 		
 		<form:label path="password">Password:</form:label>
 		<form:password path="password" name="pass"/>

@@ -59,7 +59,7 @@ public class LoginController {
 		}
 		UserDto userDto;
 		try{
-			userDto = service.getUserServiceImpl().verifyUser(userDtoToLogin.getLoginName(),userDtoToLogin.getPassword());
+			userDto = service.getUserServiceImpl().verifyUser(userDtoToLogin.getLogin(),userDtoToLogin.getPassword());
         }catch (UserNotFindException ex){
 			attributes.addFlashAttribute("error", ex.getMessage());
 			return "redirect:/";

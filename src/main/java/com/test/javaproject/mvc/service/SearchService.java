@@ -10,6 +10,6 @@ import java.util.List;
  */
 public interface SearchService {
 
-    List<ContactDto> getContactsByParameter(SearchParameter searchParameter, int userId);
+    List<ContactDto> getContactsByParameter(SearchParameter searchParameter, Long userId);
 
 }

@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by Alexey on 08.08.2017.
@@ -20,25 +19,23 @@ import java.util.Objects;
 @Component
 public class ContactDaoImpl implements ContactDao{
 
-    private SearchObject search;
     private SessionFactory sessionFactory;
 
     @Autowired
-    public ContactDaoImpl(SessionFactory sessionFactory, SearchObject search){
+    public ContactDaoImpl(SessionFactory sessionFactory){
         this.sessionFactory = sessionFactory;
-        this.search = search;
     }
 
 
     @Override
-    public List<ContactDto> getContactList(int user_id) {
+    public List<ContactDto> getContactList(Long userId) {
         List<Contact> contacts;
         List<ContactDto> contactsDto = new ArrayList<>();
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         try{
             entityManager.getTransaction().begin();
-            contacts = entityManager.createQuery("from Contact c where c.user.user_id = :user_id",Contact.class)
-                    .setParameter("user_id", user_id)
+            contacts = entityManager.createQuery("from Contact c where c.user.userId = :userId",Contact.class)
+                    .setParameter("userId", userId)
                     .getResultList();
             for (Contact c:contacts){
                 System.out.println(c.toString());
@@ -65,7 +62,7 @@ public class ContactDaoImpl implements ContactDao{
     }
 
     @Override
-    public void saveContact(int user_id, ContactDto contactDto) {
+    public void saveContact(Long userId, ContactDto contactDto) {
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         User readUser;
         Contact contact = new Contact.Builder()
@@ -79,8 +76,8 @@ public class ContactDaoImpl implements ContactDao{
                 .build();
         try{
             entityManager.getTransaction().begin();
-            readUser = entityManager.createQuery("from User where user_id =:user_id",User.class)
-                    .setParameter("user_id",user_id)
+            readUser = entityManager.createQuery("from User where userId =:userId",User.class)
+                    .setParameter("userId",userId)
                     .getSingleResult();
             contact.setUser(readUser);
             entityManager.persist(contact);
@@ -97,8 +94,8 @@ public class ContactDaoImpl implements ContactDao{
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         try{
             entityManager.getTransaction().begin();
-            Contact oldCont = entityManager.createQuery("from Contact where contact_id=:contact_id",Contact.class)
-                    .setParameter("contact_id", contactDto.getContact_id())
+            Contact oldCont = entityManager.createQuery("from Contact where contactId=:contactId",Contact.class)
+                    .setParameter("contactId", contactDto.getContactId())
                     .getSingleResult();
             oldCont.setFirstName(contactDto.getFirstName());
             oldCont.setLastName(contactDto.getLastName());
@@ -116,14 +113,14 @@ public class ContactDaoImpl implements ContactDao{
     }
 
     @Override
-    public ContactDto getContactById(int contact_id) {
+    public ContactDto getContactById(Long contactId) {
         Contact contact;
         ContactDto contactDto = null;
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         try{
             entityManager.getTransaction().begin();
-            contact = entityManager.createQuery("from Contact where contact_id=:contact_id",Contact.class)
-                    .setParameter("contact_id", contact_id)
+            contact = entityManager.createQuery("from Contact where contactId=:contactId",Contact.class)
+                    .setParameter("contactId", contactId)
                     .getSingleResult();
             contactDto = new ContactDto.Builder()
                     .setContactId(contact)
@@ -145,13 +142,13 @@ public class ContactDaoImpl implements ContactDao{
     }
 
     @Override
-    public void deleteContact(int contact_id) {
+    public void deleteContact(Long contactId) {
         Contact contact;
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         try{
             entityManager.getTransaction().begin();
-            contact = entityManager.createQuery("from Contact where contact_id=:contact_id",Contact.class)
-                    .setParameter("contact_id", contact_id)
+            contact = entityManager.createQuery("from Contact where contactId=:contactId",Contact.class)
+                    .setParameter("contactId", contactId)
                     .getSingleResult();;
             entityManager.remove(contact);
             entityManager.getTransaction().commit();
@@ -163,13 +160,13 @@ public class ContactDaoImpl implements ContactDao{
     }
 
     @Override
-    public boolean checkExistingContact(int user_id, String mobPhoneNumber) {
+    public boolean checkExistingContact(Long userId, String mobPhoneNumber) {
         EntityManager entityManager = sessionFactory.createEntityManager();
         List<Contact> contacts=null;
         try {
             entityManager.getTransaction().begin();
-            contacts = entityManager.createQuery("from Contact c where c.user.user_id = :user_id and c.mobPhoneNumber=:mobPhoneNumber", Contact.class)
-                    .setParameter("user_id",user_id)
+            contacts = entityManager.createQuery("from Contact c where c.user.userId = :userId and c.mobPhoneNumber=:mobPhoneNumber", Contact.class)
+                    .setParameter("userId",userId)
                     .setParameter("mobPhoneNumber", mobPhoneNumber)
                     .getResultList();
             entityManager.getTransaction().commit();

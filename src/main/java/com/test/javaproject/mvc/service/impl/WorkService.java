@@ -1,6 +1,5 @@
 package com.test.javaproject.mvc.service.impl;
 
-import com.test.javaproject.mvc.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

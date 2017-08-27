@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface ContactDao {
 
-    List<ContactDto> getContactList(int user_id);
-    void saveContact(int user_id, ContactDto contactDto);
+    List<ContactDto> getContactList(Long userId);
+    void saveContact(Long userId, ContactDto contactDto);
     void editContact(ContactDto contactDto);
-    ContactDto getContactById(int contact_id);
-    void deleteContact(int contact_id);
-    boolean checkExistingContact(int user_id, String mobPhoneNumber);
+    ContactDto getContactById(Long userId);
+    void deleteContact(Long userId);
+    boolean checkExistingContact(Long userId, String mobPhoneNumber);
 }

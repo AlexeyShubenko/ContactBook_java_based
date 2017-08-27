@@ -48,14 +48,14 @@ public class RegistrationController {
             attributes.addFlashAttribute("userDto",userDto);
             return "redirect:/userRegistration";
         }
-        boolean isValidLogin = RegEx.checkValidLogin(userDto.getLoginName());
+        boolean isValidLogin = RegEx.checkValidLogin(userDto.getLogin());
         if (!isValidLogin) {
             ///wrong symbols
             attributes.addFlashAttribute("error", "Don`t user special symbols for login name!");
             return "redirect:/userRegistration";
         }
         //TODO show error messages
-        boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto.getLoginName());
+        boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto.getLogin());
         if (isExistUser) {
             ///user not exist
             attributes.addFlashAttribute("error", "User with this login is exist!");

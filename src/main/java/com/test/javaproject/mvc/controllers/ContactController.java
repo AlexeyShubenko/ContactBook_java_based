@@ -80,31 +80,31 @@ public class ContactController {
 			return "redirect:/addContact";
 		} else{
 
-			boolean isContactExist = service.getContactServiceImpl().checkExistingContact(userDto.getUser_id(),contactDto.getMobPhoneNumber());
+			boolean isContactExist = service.getContactServiceImpl().checkExistingContact(userDto.getUserId(),contactDto.getMobPhoneNumber());
 			if(isContactExist){
 				attributes.addFlashAttribute("contactDto",contactDto);
 				attributes.addFlashAttribute("error","Contact with such mobile number exists!");
 				return "redirect:/addContact";
 			}else {
-				service.getContactServiceImpl().saveContact(userDto.getUser_id(), contactDto);
+				service.getContactServiceImpl().saveContact(userDto.getUserId(), contactDto);
 				return "redirect:/showContacts";
 			}
 		}
 	}
 	///"editContact/{contact_id}"
 	@RequestMapping(value="/{contact_id}", method=RequestMethod.GET)
-	public ModelAndView editContactToForm(@PathVariable("contact_id") int contact_id, HttpSession session){
+	public ModelAndView editContactToForm(@PathVariable("contact_id") Long contactId, HttpSession session){
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		if(Objects.isNull(userDto)){
 			return new ModelAndView("redirect:/");
 		}
-		ContactDto contactDto = service.getContactServiceImpl().getContactById(contact_id);
+		ContactDto contactDto = service.getContactServiceImpl().getContactById(contactId);
 		return new ModelAndView("contactOldEdit","contactDto", contactDto);
 	}
 	
 	@RequestMapping(value="/{contact_id}", method=RequestMethod.POST)
 	public String editContactToDB(@Valid @ModelAttribute("contactDto") ContactDto contactDto, BindingResult result,
-								  @PathVariable("contact_id") int contact_id,
+								  @PathVariable("contact_id") Long contactId,
 								  RedirectAttributes attributes,HttpSession session){
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		if(Objects.isNull(userDto)){
@@ -121,20 +121,20 @@ public class ContactController {
 			if(!RegEx.checkValidHomeNumber(contactDto.getHomePhoneNumber()))
 				attributes.addFlashAttribute("error2","errText.registration.errHomeNumber");
 //				model.addAttribute("edit2", true);
-			return "redirect:/"+contact_id;
+			return "redirect:/"+contactId;
 		} else{
 				service.getContactServiceImpl().editContact(contactDto);
 				return "redirect:/showContacts";
 		}
 	}
 	
-	@RequestMapping(value="/deleteContact/{contact_id}", method=RequestMethod.GET)
-	public String deleteContact(@PathVariable("contact_id") int contact_id, HttpSession session){
+	@RequestMapping(value="/deleteContact/{contactId}", method=RequestMethod.GET)
+	public String deleteContact(@PathVariable("contactId") Long contactId, HttpSession session){
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		if(Objects.isNull(userDto)){
 			return "redirect:/";
 		}
-		service.getContactServiceImpl().deleteContact(contact_id);
+		service.getContactServiceImpl().deleteContact(contactId);
 		return "redirect:/showContacts";
 	}
 	

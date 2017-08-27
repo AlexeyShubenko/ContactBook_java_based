@@ -23,7 +23,7 @@ public class SearchServiceImpl implements SearchService {
     }
 
     @Override
-    public List<ContactDto> getContactsByParameter(SearchParameter searchParameter, int userId) {
+    public List<ContactDto> getContactsByParameter(SearchParameter searchParameter, Long userId) {
         String searchBy = searchParameter.getSearchBy();
         String parameter = searchParameter.getParameter();
         List<ContactDto> allContacts  = contactService.getContactList(userId);

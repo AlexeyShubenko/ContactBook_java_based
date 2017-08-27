@@ -12,6 +12,11 @@ public class SearchParameter {
     public SearchParameter() {
     }
 
+    public SearchParameter(String searchBy, String parameter) {
+        this.searchBy = searchBy;
+        this.parameter = parameter;
+    }
+
     public String getSearchBy() {
         return searchBy;
     }

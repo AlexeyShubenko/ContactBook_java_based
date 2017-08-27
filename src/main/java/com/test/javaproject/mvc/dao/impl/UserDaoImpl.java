@@ -32,13 +32,13 @@ public class UserDaoImpl implements UserDao {
         UserDto userDto=null;
         try{
             entityManager.getTransaction().begin();
-            user = entityManager.createQuery("from User where loginName=:loginName ", User.class)
-                    .setParameter("loginName", login)
+            user = entityManager.createQuery("from User where login=:login", User.class)
+                    .setParameter("login", login)
                     .getSingleResult();
             userDto = new UserDto.Builder()
                     .setUserId(user)
                     .setFio(user)
-                    .setLoginName(user)
+                    .setLogin(user)
                     .setPassword(user)
                     .build();
             entityManager.getTransaction().commit();
@@ -57,7 +57,7 @@ public class UserDaoImpl implements UserDao {
     public void saveUser(UserDto userDto) {
         EntityManager entityManager = this.sessionFactory.createEntityManager();
         User user = new User.Builder().setFio(userDto)
-                .setLoginName(userDto)
+                .setLogin(userDto)
                 .setPassword(userDto)
                 .build();
         try{

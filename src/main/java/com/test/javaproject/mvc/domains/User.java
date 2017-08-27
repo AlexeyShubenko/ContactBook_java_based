@@ -12,12 +12,12 @@ import java.util.List;
 public class User implements Serializable{
 
 	@Id
-	@Column(name="user_id")
+	@Column(name="userid")
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int user_id;
+	private Long userId;
 	
-	@Column(name="loginName", nullable=false)
-	private String loginName;
+	@Column(name="login", nullable=false)
+	private String login;
 	
 	@Column(name="password", nullable=false)
 	private String password;
@@ -30,10 +30,10 @@ public class User implements Serializable{
 	
 	public User(){}
 	
-	public User(int user_id, String loginName, String password, String fio) {
+	public User(Long userId, String login, String password, String fio) {
 		super();
-		this.user_id = user_id;
-		this.loginName = loginName;
+		this.userId = userId;
+		this.login = login;
 		this.password = password;
 		this.fio = fio;
 	}
@@ -43,12 +43,12 @@ public class User implements Serializable{
 		private User user = new User();
 
 		public User.Builder setUserId(UserDto userDto){
-			user.setUser_id(userDto.getUser_id());
+			user.setUserId(userDto.getUserId());
 			return this;
 		}
 
-		public User.Builder setLoginName(UserDto userDto){
-			user.setLoginName(userDto.getLoginName());
+		public User.Builder setLogin(UserDto userDto){
+			user.setLogin(userDto.getLogin());
 			return this;
 		}
 
@@ -67,17 +67,17 @@ public class User implements Serializable{
 		}
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	public String getLoginName() {
-		return loginName;
+	public String getLogin() {
+		return login;
 	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	public String getPassword() {
 		return password;

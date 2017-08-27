@@ -19,13 +19,13 @@ public class ContactServiceImpl implements ContactService {
 	}
 
 	@Override
-	public List<ContactDto> getContactList(int user_id) {
-		return contactDao.getContactList(user_id);
+	public List<ContactDto> getContactList(Long userId) {
+		return contactDao.getContactList(userId);
 	}
 
 	@Override
-	public void saveContact(int user_id, ContactDto contactDto) {
-		contactDao.saveContact(user_id, contactDto);
+	public void saveContact(Long userId, ContactDto contactDto) {
+		contactDao.saveContact(userId, contactDto);
 	}
 	
 	@Override
@@ -34,19 +34,19 @@ public class ContactServiceImpl implements ContactService {
 	}
 	
 	@Override
-	public ContactDto getContactById(int contact_id) {
-		return contactDao.getContactById(contact_id);
+	public ContactDto getContactById(Long contactId) {
+		return contactDao.getContactById(contactId);
 	}
 	
 	@Override
-	public void deleteContact(int contact_id) {
-		contactDao.deleteContact(contact_id);
+	public void deleteContact(Long contactId) {
+		contactDao.deleteContact(contactId);
 	}
 
 
 
 	@Override
-	public boolean checkExistingContact(int user_id, String mobPhoneNumber) {
+	public boolean checkExistingContact(Long user_id, String mobPhoneNumber) {
 		return contactDao.checkExistingContact(user_id, mobPhoneNumber);
 	}
 }

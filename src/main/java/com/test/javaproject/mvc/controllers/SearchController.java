@@ -34,7 +34,7 @@ public class SearchController {
         List<ContactDto> allContactsByParameter = null;
         if(Objects.nonNull(userDto)){
             allContactsByParameter =
-                    workService.getSearchServiceImpl().getContactsByParameter(searchParameter, userDto.getUser_id());
+                    workService.getSearchServiceImpl().getContactsByParameter(searchParameter, userDto.getUserId());
         }
         return allContactsByParameter;
     }
@@ -44,7 +44,7 @@ public class SearchController {
         UserDto userDto = (UserDto) session.getAttribute("userDto");
         List<ContactDto> allContacts = null;
         if(Objects.nonNull(userDto)) {
-            allContacts = workService.getContactServiceImpl().getContactList(userDto.getUser_id());
+            allContacts = workService.getContactServiceImpl().getContactList(userDto.getUserId());
         }
         return allContacts;
     }

@@ -1,7 +1,5 @@
 package com.test.javaproject.mvc.dto;
 
-
-
 import com.test.javaproject.mvc.domains.User;
 
 import javax.validation.constraints.Size;
@@ -9,10 +7,10 @@ import java.io.Serializable;
 
 public class UserDto implements Serializable{
 
-	private int user_id;
+	private Long userId;
 
 	@Size(min=3, message="{user.size.login}")
-	private String loginName;
+	private String login;
 
 	@Size(min=5, message="{user.size.password}")
 	private String password;
@@ -22,10 +20,9 @@ public class UserDto implements Serializable{
 
 	public UserDto(){}
 
-	public UserDto(int user_id, String loginName, String password, String fio) {
+	public UserDto( String login, String password, String fio) {
 		super();
-		this.user_id = user_id;
-		this.loginName = loginName;
+		this.login = login;
 		this.password = password;
 		this.fio = fio;
 	}
@@ -35,12 +32,12 @@ public class UserDto implements Serializable{
 		private UserDto userDto = new UserDto();
 
 		public Builder setUserId(User user){
-			userDto.setUser_id(user.getUser_id());
+			userDto.setUserId(user.getUserId());
 			return this;
 		}
 
-		public Builder setLoginName(User user){
-			userDto.setLoginName(user.getLoginName());
+		public Builder setLogin(User user){
+			userDto.setLogin(user.getLogin());
 			return this;
 		}
 
@@ -59,17 +56,17 @@ public class UserDto implements Serializable{
 		}
 	}
 
-	public int getUser_id() {
-		return user_id;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setUser_id(int user_id) {
-		this.user_id = user_id;
+	public void setUserId(Long userId) {
+		this.userId = userId;
 	}
-	public String getLoginName() {
-		return loginName;
+	public String getLogin() {
+		return login;
 	}
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	public String getPassword() {
 		return password;
@@ -87,8 +84,8 @@ public class UserDto implements Serializable{
 	@Override
 	public String toString() {
 		return "UserDto{" +
-				"user_id=" + user_id +
-				", loginName='" + loginName + '\'' +
+				"userId=" + userId +
+				", loginName='" + login + '\'' +
 				", password='" + password + '\'' +
 				", fio='" + fio + '\'' +
 				'}';

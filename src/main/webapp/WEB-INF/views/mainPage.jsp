@@ -49,7 +49,7 @@
 
 		<div class="divTop">
 			<a href="/logOut" class="logOutRef">Log out</a>
-			<div class="divRight">login: ${userDto.loginName}</div>
+			<div class="divRight">login: ${userDto.login}</div>
 			<a class="addContact" href="./addContact"><spring:message code="button.value.addcontact"/></a>
 		</div>
 
