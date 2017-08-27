@@ -92,8 +92,8 @@ public class ContactController {
 		}
 	}
 	///"editContact/{contact_id}"
-	@RequestMapping(value="/{contact_id}", method=RequestMethod.GET)
-	public ModelAndView editContactToForm(@PathVariable("contact_id") Long contactId, HttpSession session){
+	@RequestMapping(value="/{contactId}", method=RequestMethod.GET)
+	public ModelAndView editContactToForm(@PathVariable("contactId") Long contactId, HttpSession session){
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		if(Objects.isNull(userDto)){
 			return new ModelAndView("redirect:/");
@@ -102,9 +102,9 @@ public class ContactController {
 		return new ModelAndView("contactOldEdit","contactDto", contactDto);
 	}
 	
-	@RequestMapping(value="/{contact_id}", method=RequestMethod.POST)
+	@RequestMapping(value="/{contactId}", method=RequestMethod.POST)
 	public String editContactToDB(@Valid @ModelAttribute("contactDto") ContactDto contactDto, BindingResult result,
-								  @PathVariable("contact_id") Long contactId,
+								  @PathVariable("contactId") Long contactId,
 								  RedirectAttributes attributes,HttpSession session){
 		UserDto userDto = (UserDto) session.getAttribute("userDto");
 		if(Objects.isNull(userDto)){
