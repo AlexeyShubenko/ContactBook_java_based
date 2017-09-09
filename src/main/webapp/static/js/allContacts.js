@@ -9,7 +9,7 @@ function getAllContacts() {
         success: function (data) {
             for (var i = 0; i < data.length; i++) {
                 var contact = {};
-                contact.contactId      = data[i].contactId;
+                contact.contactId       = data[i].contactId;
                 contact.firstName       = data[i].firstName;
                 contact.lastName        = data[i].lastName;
                 contact.middleName      = data[i].middleName;
@@ -26,6 +26,7 @@ function getAllContacts() {
 
 
 function showAllContacts(contacts){
+
     var table = document.getElementById("contactTable");
     if(table==null){
         var table = document.createElement("table");
@@ -44,7 +45,8 @@ function showAllContacts(contacts){
 
 
 function deletePreviousContacts(table) {
-    for (var i = 0; i < table.rows.length; i++) {
+    //var i=1, i=0 - it is the head of the table
+    for (var i = 1; i < table.rows.length; i++) {
         table.deleteRow(i);
     }
 }
