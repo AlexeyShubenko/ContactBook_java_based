@@ -2,7 +2,6 @@ package com.test.javaproject.mvc.service.impl;
 
 import com.test.javaproject.mvc.dao.impl.ContactDaoImpl;
 import com.test.javaproject.mvc.service.ContactService;
-import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.dto.ContactDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

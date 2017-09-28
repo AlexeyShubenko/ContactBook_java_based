@@ -18,13 +18,11 @@ public class Main {
 //        System.out.println(m.matches());
 
 //        int num = 12;
-//
-//        for(int i = 0; i<4;i++){
-//            if(num%2==0){
-//                System.out.print(1 + " ");
-//            }else System.out.print(0 + " ");
-//            num/=2;
-//        }
+
+        String login = "userUa";
+        Pattern p = Pattern.compile("^[A-z]+[0-9]+$");
+        Matcher m = p.matcher(login);
+        System.out.println(m.matches());
 
 
     }

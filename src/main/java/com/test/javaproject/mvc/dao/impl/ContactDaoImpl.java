@@ -2,7 +2,6 @@ package com.test.javaproject.mvc.dao.impl;
 
 import com.test.javaproject.mvc.dao.ContactDao;
 import com.test.javaproject.mvc.domains.Contact;
-import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.domains.User;
 import com.test.javaproject.mvc.dto.ContactDto;
 import org.hibernate.SessionFactory;

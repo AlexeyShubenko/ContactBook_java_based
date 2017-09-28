@@ -1,6 +1,5 @@
 package com.test.javaproject.mvc.service;
 
-import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.dto.ContactDto;
 
 import java.util.List;

@@ -4,8 +4,6 @@ import com.test.javaproject.mvc.dao.impl.UserDaoImpl;
 import com.test.javaproject.mvc.exceptions.PasswordErrorException;
 import com.test.javaproject.mvc.exceptions.UserNotFindException;
 import com.test.javaproject.mvc.service.UserService;
-import com.test.javaproject.mvc.domains.LoginTempObject;
-import com.test.javaproject.mvc.domains.User;
 import com.test.javaproject.mvc.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,7 +1,5 @@
 package com.test.javaproject.mvc.service;
 
-
-import com.test.javaproject.mvc.domains.LoginTempObject;
 import com.test.javaproject.mvc.dto.UserDto;
 
 public interface UserService {

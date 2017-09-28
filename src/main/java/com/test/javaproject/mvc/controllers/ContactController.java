@@ -2,7 +2,6 @@ package com.test.javaproject.mvc.controllers;
 
 import com.test.javaproject.mvc.service.impl.WorkService;
 import com.test.javaproject.mvc.domains.RegEx;
-import com.test.javaproject.mvc.domains.SearchObject;
 import com.test.javaproject.mvc.dto.ContactDto;
 import com.test.javaproject.mvc.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -51,6 +51,10 @@ public class RegistrationController {
         boolean isValidLogin = RegEx.checkValidLogin(userDto.getLogin());
         if (!isValidLogin) {
             ///wrong symbols
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.userDto",result);
+            userDto.setLogin("");
+            userDto.setPassword("");
+            attributes.addFlashAttribute("userDto",userDto);
             attributes.addFlashAttribute("error", "Don`t user special symbols for login name!");
             return "redirect:/userRegistration";
         }
@@ -58,6 +62,7 @@ public class RegistrationController {
         boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto.getLogin());
         if (isExistUser) {
             ///user not exist
+
             attributes.addFlashAttribute("error", "User with this login is exist!");
             return "redirect:/userRegistration";
         }

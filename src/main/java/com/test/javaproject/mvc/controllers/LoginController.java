@@ -2,7 +2,6 @@ package com.test.javaproject.mvc.controllers;
 
 import com.test.javaproject.mvc.exceptions.PasswordErrorException;
 import com.test.javaproject.mvc.service.impl.WorkService;
-import com.test.javaproject.mvc.domains.LoginTempObject;
 import com.test.javaproject.mvc.dto.UserDto;
 import com.test.javaproject.mvc.exceptions.UserNotFindException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +18,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
-import java.util.Objects;
-
 
 @Controller
 @SessionAttributes(value="userDto")
