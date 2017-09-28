@@ -62,7 +62,10 @@ public class RegistrationController {
         boolean isExistUser = service.getUserServiceImpl().checkExistingUser(userDto.getLogin());
         if (isExistUser) {
             ///user not exist
-
+            attributes.addFlashAttribute("org.springframework.validation.BindingResult.userDto",result);
+            userDto.setLogin("");
+            userDto.setPassword("");
+            attributes.addFlashAttribute("userDto",userDto);
             attributes.addFlashAttribute("error", "User with this login is exist!");
             return "redirect:/userRegistration";
         }
